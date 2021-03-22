@@ -5,6 +5,8 @@ import readCase
 from common.configHttp  import RunMain
 from pytest import mark,main
 import os
+import log
+log=log.Logger().get_logger()
 
 
 
@@ -14,6 +16,11 @@ login_xls=readCase.readExcel().get_exceldata('油桃接口测试用例文档.xls
 
 
 class TestLogin():
+    def setup(self):
+        print('测试准备')
+        # path=os.path.join(getpathInfo.get_Path(),'testcase','testLogin.py')
+        # print('日志：')
+        # log.info('path:%s',path)
 
     @mark.parametrize('reqdata,respdata',login_xls)
     def test_login(self,reqdata,respdata):
@@ -22,11 +29,16 @@ class TestLogin():
         print('*'*30)
         print('预期结果为：',respdata)
         assert response['reason']==respdata['reason']
+    @mark.smoke
+    def test_a(self):
+        print('ABCD')
+    def teardown(self):
+        print('测试结束')
 if __name__ == '__main__':
-    path=getpathInfo.get_Path()+'/report/tmg'
-    print(path)
+    # path=getpathInfo.get_Path()+'/report/tmg'
+    # print(path)
     main(["-s","-v",'--alluredir','../report/tmg','testLogin.py','--clean-alluredir'])
-    os.system('allure serve ../report/tmg')
+    # os.system('allure serve ../report/tmg')
     '''
     问题原因：
 

@@ -18,10 +18,14 @@ class readExcel():
             if cassname in sheet.row_values(i)[0]:
                 reqdata=sheet.row_values(i)[6]
                 respdata=sheet.row_values(i)[8]
+                # url=sheet.row_values(i)[3]
                 # print(reqdata)
                 # print(respdata)
+                # print(type(reqdata,respdata))
                 
+                # listdata.append((json.loads(reqdata),json.loads(respdata),url))
                 listdata.append((json.loads(reqdata),json.loads(respdata)))
+
         return listdata
 # res=readExcel().get_exceldata('油桃接口测试用例文档.xls','1-登录模块','login')
 # pprint.pprint(res)
